@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- BatteryAA aa = new BattteryAA();
+		aa.setEnergy(100);
+		
+		Toy.toy = new Toy(aa);
+		
+		스프링 빈 간의 의존관계는 생성자 및 setter를 이용하여 주입한다
+	
+	 -->						
+	
+	
+	<bean id="aa" class="p2.BatteryAA">
+		<property name="energy" value="100"></property>
+								<!-- 직접 입력 -->
+	
+	</bean>
+	<bean id="toy" class="p2.Toy">
+		<constructor-arg ref="aa"></constructor-arg> 
+						<!--  다른 객체 참조 -->
+	</bean>
+							
+	
+							
+</beans>
