@@ -30,5 +30,15 @@
 		delete board3 where idx = #{idx}
 		
 	</delete>
+	
+	<update id="update" parameterType="board">
+		update board3 
+			set
+				title = #{title},
+				content = #{content}
+				where
+				idx = #{idx} and
+				writer = #{writer}	
+	</update>
 
 </mapper>

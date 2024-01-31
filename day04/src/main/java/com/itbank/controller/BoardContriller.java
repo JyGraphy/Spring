@@ -19,7 +19,9 @@ public class BoardContriller {
 
 	@Autowired
 	private BoardService boardService;
-
+	
+	
+	// 게시글 전체 보기
 	@GetMapping("/list")
 	public ModelAndView list() {
 		ModelAndView mav = new ModelAndView();
@@ -28,6 +30,7 @@ public class BoardContriller {
 		return mav;
 	}
 	
+	// 게시글 상세보기
 	@GetMapping("/view/{idx}")
 	public ModelAndView view(@PathVariable("idx") int idx) {
 		ModelAndView mav = new ModelAndView("/board/view");
@@ -36,6 +39,7 @@ public class BoardContriller {
 		return mav;
 	}
 	
+	// 게시글 작성
 	@GetMapping("/write")
 	public void write() {}
 	
@@ -48,8 +52,8 @@ public class BoardContriller {
 		return "redirect:/board/list";
 	}
 	
+	// 게시글 삭제
 	@GetMapping("/delete/{idx}")
-	
 	public ModelAndView delete(@PathVariable("idx") int idx) {
 		// if(session.getAttribute("login") == null) {
 		//		return "redirect:/member/login";
@@ -67,7 +71,33 @@ public class BoardContriller {
 		return mav;
 	}
 	
+	// 게시글 수정
+	// 어떤 데이터를 JSP에게 보내려면 ModelAndView
+	// 데이터를 보내지 않으면 String 혹은 void
 	
+	// pathVariable때문에 viewName을 강제로 지정해야 하면 String 혹은 ModelAndView
+	// 요청주소 그대로 JSP의 이름을 지정하려면 void
+	@GetMapping("/modify/{idx}")
+	public ModelAndView modify(@PathVariable("idx") int idx) {
+		ModelAndView mav = new ModelAndView("/board/modify");
+		BoardDTO dto = boardService.getBoard(idx);
+		mav.addObject("dto", dto);
+		return mav;
+		
+	}
+	
+	@PostMapping("/modify/{idx}")
+	public ModelAndView modify(BoardDTO dto) {
+		ModelAndView mav = new ModelAndView("alert");
+		int row = boardService.modify(dto);
+		String msg = row !=0 ? "수정 성공" : "수정 실패";
+		String url = "/board/view/" + dto.getIdx();
+		
+		mav.addObject("msg", msg);
+		mav.addObject("url", url);  
+		return mav;
+		
+	}
 	
 	
 }
