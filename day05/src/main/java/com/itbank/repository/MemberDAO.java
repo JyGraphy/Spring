@@ -1,4 +1,4 @@
-package com.itbank.repository;
+ package com.itbank.repository;
 
 import java.util.List;
 
