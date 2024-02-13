@@ -4,6 +4,7 @@
 async function clickHandler2() {			// 요청해서 , 응답받은 내용을 HTML 태그 문자열 형태로 반환
 											// JSON 객체의 속성을 활용하여  HTML 태그를 생성한다
 	const url = cpath + '/ex02/js'
+	// result는 ex02Controller에  @GetMapping로 넘겨진다
 	const result = await fetch(url).then(resp => resp.json())
 	const arr = result.getFestivalKr.item
 	let tag = ''

@@ -20,11 +20,14 @@ public class Ex02Controller {
 		
 	}
 	
+	// festival.js에 result의 값을 받고
 	@GetMapping(value ="/ex02/js", produces = "application/json; charset=utf-8")
 	@ResponseBody		// 컨트롤러의 함수가 viewName 을 반환하지 않고, 응답 그 자체를 반환한다
 	public String ex02Js() throws MalformedURLException, IOException {
 		String json = service.getFestivalJson();
 		return json;
+		// 다시 festival.js result에 값을 반환시킨다
+		
 	}
 	
 }
